@@ -3,6 +3,7 @@ package com.example.scannerapp
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeScanner(): GmsBarcodeScannerOptions{
-        return GmsBarcodeScannerOptions.Builder().setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+        return GmsBarcodeScannerOptions.Builder().setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS)
             .enableAutoZoom().build()
     }
 
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             result.let {
                 binding.resultValueTxt.text= it
                 if (result != null) {
-                    if (result.contains("https://")){
+                    if (result.contains("https://")||result.contains("http://")){
                         val intent= Intent(this, WebViewActivity::class.java)
                         intent.putExtra("url",result)
                         startActivity(intent)
