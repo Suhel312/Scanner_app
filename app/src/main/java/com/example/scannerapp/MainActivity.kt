@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             result.let {
                 binding.resultValueTxt.text= it
                 if (result != null) {
-                    if (result.contains("https://")||result.contains("http://")){
+                    if (result.startsWith("https://")||result.startsWith("http://")){
                         val intent= Intent(this, WebViewActivity::class.java)
                         intent.putExtra("url",result)
                         startActivity(intent)
